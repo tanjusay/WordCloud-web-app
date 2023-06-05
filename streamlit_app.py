@@ -13,11 +13,6 @@ def extract_text_from_pdf(file):
     return text
 
 
-def extract_text_from_docx(file):
-    doc = Document(file)
-    text = " ".join([paragraph.text for paragraph in doc.paragraphs])
-    return text
-
 
 def generate_wordcloud(text):
     wordcloud = WordCloud().generate(text)
@@ -26,17 +21,15 @@ def generate_wordcloud(text):
 
 def main():
     st.title("Word Cloud Generator")
-    st.write("Upload a PDF, DOCX, or TXT file to generate a word cloud.")
+    st.write("Upload a PDF, or TXT file to generate a word cloud.")
 
-    file = st.file_uploader("Upload File", type=["pdf", "docx", "txt"])
+    file = st.file_uploader("Upload File", type=["pdf", "txt"])
 
     if file is not None:
         file_type = file.name.split(".")[-1]
 
         if file_type == "pdf":
             text = extract_text_from_pdf(file)
-        elif file_type == "docx":
-            text = extract_text_from_docx(file)
         elif file_type == "txt":
             text = file.read().decode("utf-8")
 

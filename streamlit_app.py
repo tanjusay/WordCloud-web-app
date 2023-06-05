@@ -2,7 +2,6 @@ import streamlit as st
 from wordcloud import WordCloud
 from io import BytesIO
 import PyPDF2
-from docx import Document
 
 
 def extract_text_from_pdf(file):

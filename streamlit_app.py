@@ -1,5 +1,5 @@
 import streamlit as st
-import PyPDF2
+from PyPDF2 import PdfReader
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 from io import BytesIO
@@ -7,10 +7,10 @@ from io import BytesIO
 
 def extract_important_words(pdf_file):
     # Extract text from PDF
-    pdf_reader = PyPDF2.PdfFileReader(pdf_file)
+    pdf_reader = PdfReader(pdf_file)
     text = ""
-    for page in range(pdf_reader.numPages):
-        text += pdf_reader.getPage(page).extractText()
+    for page in pdf_reader.pages:
+        text += page.extract_text()
 
     # Perform text processing and extract important words
     # Replace with your own logic for extracting important words
